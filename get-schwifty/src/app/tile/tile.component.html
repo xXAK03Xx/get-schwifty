@@ -1,0 +1,3 @@
+<div (click)="clickHandler()" class="grid-item" [ngStyle]="{'background-position': getBackgroundPosition(), 'background-size': calcSize(), 'background-image': getTileImage()}">
+      <div *ngIf="showNums">{{ showTileNum()}}</div>
+</div>

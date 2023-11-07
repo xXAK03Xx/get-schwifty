@@ -1,0 +1,21 @@
+<div class="background-img">
+  
+
+  <div class="board-body">
+    <p>board works!</p>
+    <div class="grid-container" [ngStyle]="{'grid-template-columns': calcFrs(), 'grid-template-rows': calcFrs()}">
+      <app-tile
+          *ngFor="let tile of tiles"
+          [tile]="tile"
+          [size]="rows"
+          [showNums]="showNums">
+      </app-tile>
+    </div>
+    <div class="board-utilities">
+      <button (click)="handleShuffleClick()" class="button-utility">shuffle board</button>
+      <button (click)="handleResetClick()" class="button-utility">reset board</button>
+      <mat-checkbox (change)="handleCheckboxChange()" class="show-numbers">show numbers</mat-checkbox>
+    </div>
+  </div>
+  
+</div>
