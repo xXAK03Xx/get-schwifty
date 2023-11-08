@@ -21,6 +21,7 @@ export class BoardComponent {
   width: number = 600;
   tiles: Tile[] = [];
   showNums: boolean = false;
+  userInput: number = 0;
 
   constructor(private tileManagerService: TileManagerService){console.log(this.rows)}
 
@@ -30,7 +31,27 @@ export class BoardComponent {
     this.tiles =  this.tileManagerService.initializeTiles(this.rows, this.cols);
   }
 
+  // formatLabel(value: number): string {
+  //   console.log(value);
+  //   this.cols = value;
+  //   this.rows = value;
+  //   // this.tileManagerService.setRowCol(value, value);
+  //   return `${value}`;
+  // }
 
+  handleSliderChange()
+  {
+    console.log("i was called");
+  }
+
+  onInputChange(event: Event) {
+    const val = +(event.target as HTMLInputElement).value;
+    this.cols = val;
+    this.rows = val;
+    this.tiles = this.tileManagerService.initializeTiles(this.rows, this.cols);
+  }
+
+  
   calcFrs(): string
   {
     let frs = "";

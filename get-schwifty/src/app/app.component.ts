@@ -28,33 +28,33 @@ export class AppComponent {
 
   ngOnInit():void
   {
-    this.divTest.nativeElement.innerHTML = "this works";
-    let vert = 0;
-    let horiz = 0;
-    let vertDevider = (this.height / this.cols) + 2;
-    let horizDevider = (this.width / this.rows) + 2;
-    for (let i = 0; i < this.rows; i++) 
-    {
-      for (let j = 0; j < this.cols; j++) 
-      {
-        let tileTemp: Tile = {originalIndex: i + j,
-          currentIndex: i+j,
-          bPosVertical: vert,
-          bPosHorizontal: horiz,
-          urlImg: "https://wallpapers.com/images/featured/4k-nature-ztbad1qj8vdjqe0p.jpg",
-          // urlImg: "file://C:\Users\ariel\Pictures\Camera Roll\WIN_20210823_12_06_10_Pro.jpg",
-          isEmpty: false
-        }
-        this.tiles.push(tileTemp);
-        vert -= vertDevider;
-      }
-      vert = 0;
-      horiz -= horizDevider;
-    }
-    // this.suffleTiles();
-    // this.makeEmptyTile();
-    this.tiles[this.tiles.length - 1].isEmpty = true;
-    this.tiles[this.tiles.length - 1].urlImg = "white";
+    // this.divTest.nativeElement.innerHTML = "this works";
+    // let vert = 0;
+    // let horiz = 0;
+    // let vertDevider = (this.height / this.cols) + 2;
+    // let horizDevider = (this.width / this.rows) + 2;
+    // for (let i = 0; i < this.rows; i++) 
+    // {
+    //   for (let j = 0; j < this.cols; j++) 
+    //   {
+    //     let tileTemp: Tile = {originalIndex: i + j,
+    //       currentIndex: i+j,
+    //       bPosVertical: vert,
+    //       bPosHorizontal: horiz,
+    //       urlImg: "https://wallpapers.com/images/featured/4k-nature-ztbad1qj8vdjqe0p.jpg",
+    //       // urlImg: "file://C:\Users\ariel\Pictures\Camera Roll\WIN_20210823_12_06_10_Pro.jpg",
+    //       isEmpty: false
+    //     }
+    //     this.tiles.push(tileTemp);
+    //     vert -= vertDevider;
+    //   }
+    //   vert = 0;
+    //   horiz -= horizDevider;
+    // }
+    // // this.suffleTiles();
+    // // this.makeEmptyTile();
+    // this.tiles[this.tiles.length - 1].isEmpty = true;
+    // this.tiles[this.tiles.length - 1].urlImg = "white";
   }
 
   // checkMoveValid(): boolean

@@ -1,8 +1,9 @@
 <div class="background-img">
-  
-
+    
   <div class="board-body">
-    <p>board works!</p>
+    <mat-slider min="3" max="8" step="1" showTickMarks discrete class="slider-size" (onchange)="handleSliderChange()">
+      <input matSliderThumb aria-label="showValue" (input)="onInputChange($event)">
+    </mat-slider>
     <div class="grid-container" [ngStyle]="{'grid-template-columns': calcFrs(), 'grid-template-rows': calcFrs()}">
       <app-tile
           *ngFor="let tile of tiles"
@@ -12,8 +13,9 @@
       </app-tile>
     </div>
     <div class="board-utilities">
-      <button (click)="handleShuffleClick()" class="button-utility">shuffle board</button>
-      <button (click)="handleResetClick()" class="button-utility">reset board</button>
+      <a href="/leaderboard" class="button-utility">leaderboard</a>
+      <button (click)="handleShuffleClick()" class="button-utility">shuffle</button>
+      <button (click)="handleResetClick()" class="button-utility">reset</button>
       <mat-checkbox (change)="handleCheckboxChange()" class="show-numbers">show numbers</mat-checkbox>
     </div>
   </div>

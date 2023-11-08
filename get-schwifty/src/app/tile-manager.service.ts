@@ -20,6 +20,7 @@ export class TileManagerService {
 
   initializeTiles(rows:number, cols: number): Tile[]
   {
+    this.tiles = [];
     this.cols = cols;
     this.rows = rows;
     let vert = 0;
@@ -53,6 +54,11 @@ export class TileManagerService {
     return this.tiles;
   }
 
+  getSize()
+  {
+    
+    return this.rows;
+  }
 
   checkMoveValid(tile: Tile): boolean
   {

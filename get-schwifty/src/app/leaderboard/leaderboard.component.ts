@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Results } from '../results';
 import { Scores } from '../scores';
 
-
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',

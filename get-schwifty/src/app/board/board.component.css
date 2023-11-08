@@ -1,7 +1,3 @@
-
-
-
-
 .board-body
 {
     display: flex;
@@ -60,6 +56,18 @@
     color: white;
 }
 
+.slider-size
+{
+  margin-top: 2%;
+  width: 16%;
+}
+
+.thumb-lable-color
+{
+  background-color: lightgreen;
+}
+
+
 .button-utility {
   align-items: center;
   background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
@@ -70,11 +78,9 @@
   color: #FFFFFF;
   display: flex;
   font-family: Phantomsans, sans-serif;
-  font-size: 10px;
+  font-size: 20px;
   justify-content: center;
   line-height: 1em;
-  max-width: 40px;
-  min-width: 40px;
   padding: 10px 12px;
   text-decoration: none;
   user-select: none;
@@ -86,17 +92,12 @@
   margin-right: 5px;
 }
 
+
 .button-utility:active,
 .button-utility:hover {
   outline: 0;
 }
 
-@media (min-width: 768px) {
-  .button-utility {
-    font-size: 16px;
-    min-width: 120px;
-  }
-}
 
 
 /* CSS */

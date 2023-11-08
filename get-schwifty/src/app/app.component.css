@@ -22,6 +22,16 @@ div[ng-view]{
     height: 100%;
 }
 
+.title
+{
+    text-align: center;
+    width: 100%;
+    color: lightgreen;
+    padding-top: 5%;
+    font-size: 80px;
+    font-family: monaco;
+}
+
 .background-img
 {
     width: 100%;

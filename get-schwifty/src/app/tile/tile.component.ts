@@ -1,6 +1,7 @@
 import { Component, Input} from '@angular/core';
 import { Tile } from '../tile';
 import { TileManagerService } from '../tile-manager.service';
+import { SimpleChanges } from '@angular/core';
 
 
 @Component({
@@ -18,7 +19,11 @@ export class TileComponent {
 
   constructor(private tileManagerService: TileManagerService){}
 
-
+  ngOnChanges(changes: SimpleChanges) {
+    // this.size = this.tileManagerService.getSize();
+    console.log("change has been called: " + this.size);
+  }
+  
   ngOnInit():void
   {
   }
@@ -35,7 +40,7 @@ export class TileComponent {
     if (this.tile.isEmpty) {
       return '100% 100%';
     }
-    const num = (this.size * 100) + 10;
+    const num = (this.size * 100) + 18;
     return num + "% " + num + "%"; 
   }
 
