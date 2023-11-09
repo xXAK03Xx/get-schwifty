@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Results } from '../results';
 import { Scores } from '../scores';
+import { LocalstorageService } from '../localstorage.service';
+
 
 @Component({
   selector: 'app-leaderboard',
@@ -10,42 +12,29 @@ import { Scores } from '../scores';
 export class LeaderboardComponent {
 
   scoreKey: string = "scores"; 
+  currentScore?: Scores = undefined;
+  scores: Scores[] = [];
 
-  constructor(){}
-
+  constructor(private loaclStorageService: LocalstorageService){}
 
   ngOnInit(): void
   {
-    this.getScores()
+    this.loaclStorageService.initializeScroes();
+    this.scores = this.loaclStorageService.getScoresFromData();
+    this.currentScore = this.loaclStorageService.getGradesOfCategory(3);
+    console.log(this.scores);
   }
 
-  getScores(): Scores[]
+  getDateOfRes(i: number): string
   {
-
-    let returnedScores = window.localStorage.getItem(this.scoreKey);
-    // console.log(JSON.parse(oloReturned!));
-    return JSON.parse(returnedScores!);
-    
+    let temp = this.currentScore?.results[i].date;
+    return temp!.toString().slice(0,10);
   }
 
-  setScores(scores: Scores[])
-  {
-    window.localStorage.setItem(this.scoreKey, JSON.stringify(scores));
-  }
-
-  sortGrades(grades: Results[]): void
-  {
-    grades.sort((a, b) => {
-
-      if (a.time < b.time) {
-        return -1;
-      }
-      if (a.time > b.time) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    });
+  onClick(event: any) {
+    let element = event.target || event.srcElement || event.currentTarget;
+    // Get the id of the source element
+    let elementId = element.id;
+    this.currentScore = this.loaclStorageService.getGradesOfCategory(elementId);
   }
 }

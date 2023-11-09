@@ -55,6 +55,9 @@ export class AppComponent {
     // // this.makeEmptyTile();
     // this.tiles[this.tiles.length - 1].isEmpty = true;
     // this.tiles[this.tiles.length - 1].urlImg = "white";
+
+    let olo = "test";
+    olo += "olo";
   }
 
   // checkMoveValid(): boolean

@@ -1,5 +1,5 @@
 export interface Results {
-    time: Date;
+    time: number;
     name: string;
     date: Date;
 }

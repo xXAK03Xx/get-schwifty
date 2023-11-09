@@ -1,6 +1,6 @@
 <div class="category">
-    <button class="button-85">3x3</button>
-    <button class="button-85">4x4</button>
+    <button class="button-85" (click)="onClick($event)" id={{item.cols}} *ngFor="let item of scores">{{item.rows + " x " + item.cols}}</button>
+    
 </div>
 <div class="leaderboard-wrapper">
     <div class="main_leaderboard">
@@ -9,31 +9,12 @@
         </div>
         <div class="leaderboard">
             <table class="table-leaderboard">
-                <tr class="table_unit">
-                    <td class="table-item">1</td>
-                    <td class="table-item">Ariel</td>
-                    <td class="table-item">258.242</td>
-                </tr>
-                <tr class="table_unit">
-                    <td class="table-item">2</td>
-                    <td class="table-item">or</td>
-                    <td class="table-item">258.242</td>
-                </tr>
-                <tr class="table_unit">
-                    <td class="table-item">3</td>
-                    <td class="table-item">ariel</td>
-                    <td class="table-item">258.223</td>
-                </tr>
-                <tr class="table_unit">
-                    <td class="table-item">4</td>
-                    <td class="table-item">or</td>
-                    <td class="table-item">258.223</td>
-                </tr>
-                <tr class="table_unit">
-                    <td class="table-item">5</td>
-                    <td class="table-item">menachem</td>
-                    <td class="table-item">258.223</td>
-                </tr>
+                <tr class="table_unit" *ngFor="let item of currentScore?.results; index as i">
+                    <td class="table-item">{{i + 1}}</td>
+                    <td class="table-item">{{item.name}}</td>
+                    <td class="table-item">{{item.time}}</td>
+                    <td class="table-item">{{getDateOfRes(i)}}</td>
+                </tr>                
             </table>
             <div class="board-utilities">
                 <a href="/game" class="button-utility">Back to game</a>
