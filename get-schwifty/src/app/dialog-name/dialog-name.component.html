@@ -1,0 +1,12 @@
+<div class="title">congratulation you made it to the leaderboard</div>
+<div>Enter Your Name</div>
+
+<mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="userName" aria-label="getName">
+  </mat-form-field>
+
+<div mat-dialog-actions>
+<button mat-button (click)="onNoClick()">No Thanks</button>
+<button mat-button [mat-dialog-close]="userName" cdkFocusInitial>Ok</button>
+</div>

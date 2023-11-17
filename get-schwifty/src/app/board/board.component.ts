@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Tile } from '../tile';
 import { TileManagerService } from '../tile-manager.service';
+import { LocalstorageService } from '../localstorage.service';
 
 
 
@@ -22,14 +23,16 @@ export class BoardComponent {
   tiles: Tile[] = [];
   showNums: boolean = false;
   userInput: number = 0;
+  startTime: number = -1;
 
-  constructor(private tileManagerService: TileManagerService){console.log(this.rows)}
+  constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService){}
 
 
   ngOnInit(): void
   {
     this.tiles =  this.tileManagerService.initializeTiles(this.rows, this.cols);
   }
+
 
   // formatLabel(value: number): string {
   //   console.log(value);
@@ -64,12 +67,16 @@ export class BoardComponent {
   handleResetClick()
   {
     this.tileManagerService.reset();
+    this.startTime = -1;
+    this.localStorageService.setTimer(-1);
     // this.tiles = this.tileManagerService.getTiles();
   }
 
   handleShuffleClick()
   {
     this.tileManagerService.suffleTiles();
+    this.startTime = performance.now();
+    this.localStorageService.setTimer(performance.now());
     // this.tiles = this.tileManagerService.getTiles();
   }
 

@@ -197,4 +197,14 @@ export class TileManagerService {
       }
     }
   }
+
+  userWin(): boolean
+  {
+    for (let i = 0; i < this.tiles.length; i++) {
+      if (this.tiles[i].originalIndex !== i) {
+        return false;
+      }      
+    }
+    return true;
+  }
 }
