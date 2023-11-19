@@ -10,6 +10,7 @@ export class LocalstorageService {
   scoreKey: string = "scores";
   scores: Scores[] = [];
   startTime: number = -1;
+  name: string = "winner";
 
   constructor() { }
 
@@ -97,10 +98,17 @@ export class LocalstorageService {
     if (this.scores == null || this.scores.length == 0) {
       this.initializeScroes()
     }
-    let res: Results = {time: performance.now() - this.startTime, name: "winner", date: new Date(Date.now())}
+    let res: Results = {time: performance.now() - this.startTime, name: this.name, date: new Date(Date.now())}
     this.scores[size - 3].results.push(res);
     this.sortGrades(this.scores[size - 3].results);
     this.scores[size - 3].results.pop();
     this.setScores(this.scores);
+    console.log("addScore ran");
+  }
+
+  setName(name: string)
+  {
+    this.name = name;
+    console.log("service: "+name);
   }
 }

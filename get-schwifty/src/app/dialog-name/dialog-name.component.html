@@ -1,12 +1,14 @@
-<div class="title">congratulation you made it to the leaderboard</div>
-<div>Enter Your Name</div>
+<div class="dialog-container"> 
 
-<mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="userName" aria-label="getName">
-  </mat-form-field>
+  <div class="title">Congrats you made it to the leaderboard</div>
+  <div>Enter Your Name</div>
 
-<div mat-dialog-actions>
-<button mat-button (click)="onNoClick()">No Thanks</button>
-<button mat-button [mat-dialog-close]="userName" cdkFocusInitial>Ok</button>
+  <mat-form-field>
+      <mat-label>Enter Your Name</mat-label>
+      <input matInput [(ngModel)]="userInput" aria-label="getName" placeholder="html">
+    </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" class="button-utility">Save Name</button>
+  </div>
 </div>

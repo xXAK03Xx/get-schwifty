@@ -17,7 +17,7 @@ export class TileComponent {
   @Input() tile!: Tile;
   @Input() size!: number;
   @Input() showNums!: boolean;
-  userName: string = "";
+  userName: string = "tile comp";
 
   constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService, public dialog: MatDialog){}
 
@@ -28,8 +28,19 @@ export class TileComponent {
   
   openDialog()
   {
-    this.dialog.open(DialogNameComponent,{
-      data: {userName: this.userName}});
+    //check if user actually got to the leaderboard
+    const dialogRef = this.dialog.open(DialogNameComponent,{
+      panelClass: 'dialog-design',
+      width: '60%',
+      height: '30%',
+      data: {userName: "winner"}});
+
+
+    dialogRef.afterClosed().subscribe(
+      data => {this.localStorageService.setName(data);
+        this.localStorageService.addScore(this.size);
+      }      
+    );   
   }
   
   ngOnInit():void
@@ -44,8 +55,7 @@ export class TileComponent {
     if (this.tileManagerService.userWin()) 
     {
       console.log("user have won");
-      this.openDialog();
-      this.localStorageService.addScore(this.size);
+      this.openDialog();//השאלה זה מי נשמר ראשון השם או addScore רץ לפני
     }
   }
 

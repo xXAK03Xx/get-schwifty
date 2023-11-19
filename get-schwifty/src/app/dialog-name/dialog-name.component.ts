@@ -15,13 +15,17 @@ import {
   styleUrls: ['./dialog-name.component.css']
 })
 export class DialogNameComponent {
+
+  userInput: string = "Winner";
   
   constructor(
     public dialogRef: MatDialogRef<DialogNameComponent>,
     @Inject(MAT_DIALOG_DATA) public userName: string,
-  ) {}
+  ) 
+  {console.log(userName)}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.userName = this.userInput;
+    this.dialogRef.close(this.userName);
   }
 }
