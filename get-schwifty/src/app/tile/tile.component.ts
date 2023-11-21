@@ -5,6 +5,7 @@ import { SimpleChanges } from '@angular/core';
 import { LocalstorageService } from '../localstorage.service';
 import { MatDialog } from '@angular/material/dialog';
 import {DialogNameComponent} from '../dialog-name/dialog-name.component'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tile',
@@ -19,7 +20,7 @@ export class TileComponent {
   @Input() showNums!: boolean;
   userName: string = "tile comp";
 
-  constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService, public dialog: MatDialog){}
+  constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService, public dialog: MatDialog, private router: Router){}
 
   ngOnChanges(changes: SimpleChanges) {
     // this.size = this.tileManagerService.getSize();
@@ -33,14 +34,20 @@ export class TileComponent {
       panelClass: 'dialog-design',
       width: '60%',
       height: '30%',
+      enterAnimationDuration: '1000ms',
+      role: 'dialog',
       data: {userName: "winner"}});
 
 
     dialogRef.afterClosed().subscribe(
-      data => {this.localStorageService.setName(data);
+      data => {
+        // let dataT = data == ""? data = "anonymous": data;
+        this.localStorageService.setName( data);
         this.localStorageService.addScore(this.size);
+        this.router.navigate(['/leaderboard']);
       }      
     );   
+
   }
   
   ngOnInit():void
@@ -52,10 +59,15 @@ export class TileComponent {
     console.log("ive been clicked");
     console.log(this.tile.isEmpty);
     this.tileManagerService.move(this.tile);
-    if (this.tileManagerService.userWin()) 
+    if (this.tileManagerService.userWin() && this.localStorageService.startTime != -1 ) 
     {
-      console.log("user have won");
-      this.openDialog();//השאלה זה מי נשמר ראשון השם או addScore רץ לפני
+      if (this.localStorageService.madeItToLeaderboard(this.size)) {
+        console.log("user have won");
+        this.openDialog();
+      }
+      else{      
+        this.localStorageService.startTime = -1;
+      }
     }
   }
 

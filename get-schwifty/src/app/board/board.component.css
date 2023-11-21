@@ -51,11 +51,20 @@
     background-repeat: no-repeat;
 }
 
+:host 
+{
+  ::ng-deep
+  {
+    
+  }
+}
+
 .show-numbers
 {
-    color: white;
-    
+  color: white;        
 }
+
+
 
 .slider-size
 {

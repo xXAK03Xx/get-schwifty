@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Tile } from '../tile';
 import { TileManagerService } from '../tile-manager.service';
 import { LocalstorageService } from '../localstorage.service';
@@ -10,7 +10,7 @@ import { LocalstorageService } from '../localstorage.service';
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
-  providers: []
+  providers: [],
 })
 
 

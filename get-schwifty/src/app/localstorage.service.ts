@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Results } from './results';
 import { Scores } from './scores';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class LocalstorageService {
     // this.scores = this.getScoresFromData();
     // let grades: Results[] = [{time: 99999999,name: "Ariel",date: new Date(Date.now())} , {time: 99999998,name: "ori",date: new Date(Date.now())}, {time: 99999999,name: "daniel",date: new Date()},{time: 99999999,name: "ariel",date: new Date()},{time: 99999999,name: "ori",date: new Date()}];
     //   // grades.push({time: 5,name: "test 22",date: 3})
-    //   let olo = new Date(Date.now())
     //   let tempScores: Scores[] = [];
     //   for (let index = 0; index < 6; index++) {
     //     tempScores[index] = {rows: 3 + index, cols: 3 + index, results: grades};      
@@ -32,15 +32,20 @@ export class LocalstorageService {
     //   // grades3.pop();
     //   // tempScores[2] = {rows: 5, cols: 5, results: grades3}; 
     //   this.setScores(tempScores);
-    // if (this.scores == null || this.scores.length == 0) {
-    //   let grades: Results[] = [{time: 99999999,name: "Ariel",date: new Date()} , {time: 99999998,name: "ori",date: new Date(Date.now())}, {time: 99999999,name: "daniel",date: new Date()},{time: 99999999,name: "ariel",date: new Date()},{time: 99999999,name: "ori",date: new Date()}];
-    //   // grades.push({time: 5,name: "test 22",date: 3})
-    //   let tempScores: Scores[] = [];
-    //   for (let index = 0; index < 6; index++) {
-    //     tempScores[index] = {rows: 3 + index, cols: 3 + index, results: grades};      
-    //   }
-    //   this.setScores(tempScores);
-    // }   
+
+
+
+    this.scores = this.getScoresFromData();
+
+    if (this.scores == null || this.scores.length == 0) {
+      let grades: Results[] = [{time: 99999999,name: "Ariel",date: new Date()} , {time: 99999998,name: "ori",date: new Date(Date.now())}, {time: 99999999,name: "daniel",date: new Date()},{time: 99999999,name: "ariel",date: new Date()},{time: 99999999,name: "ori",date: new Date()}];
+      // grades.push({time: 5,name: "test 22",date: 3})
+      let tempScores: Scores[] = [];
+      for (let index = 0; index < 6; index++) {
+        tempScores[index] = {rows: 3 + index, cols: 3 + index, results: grades};      
+      }
+      this.setScores(tempScores);
+    }   
     this.scores = this.getScoresFromData();
     // this.scores[0].results = 
     for (let index = 0; index < this.scores.length; index++) {      
@@ -110,5 +115,17 @@ export class LocalstorageService {
   {
     this.name = name;
     console.log("service: "+name);
+  }
+
+  madeItToLeaderboard(size: number): boolean
+  {
+    if (this.scores == null || this.scores.length == 0) {
+      this.initializeScroes()
+    }
+    const res = this.scores[size - 3].results;
+    if (res[res.length - 1].time > performance.now() - this.startTime) {
+      return true;
+    }
+    return false;
   }
 }

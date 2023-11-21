@@ -25,7 +25,8 @@ export class DialogNameComponent {
   {console.log(userName)}
 
   onNoClick(): void {
-    this.userName = this.userInput;
+    this.userName = this.userInput === "" ? this.userInput = "anonymous": this.userInput;
+    // this.userName = this.userInput;
     this.dialogRef.close(this.userName);
   }
 }

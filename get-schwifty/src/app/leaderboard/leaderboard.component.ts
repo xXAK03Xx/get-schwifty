@@ -27,8 +27,10 @@ export class LeaderboardComponent {
 
   getDateOfRes(i: number): string
   {
-    let temp = this.currentScore?.results[i].date;
-    return temp!.toString().slice(0,10);
+    let temp = new Date(Date.parse( this.currentScore?.results[i].date.toString()!));
+    let temp2 = this.currentScore?.results[i].date as Date;
+    return temp.toLocaleDateString();
+    // return temp!.toString().slice(0,10);
   }
 
   onClick(event: any) {
@@ -37,4 +39,6 @@ export class LeaderboardComponent {
     let elementId = element.id;
     this.currentScore = this.loaclStorageService.getGradesOfCategory(elementId);
   }
+
+
 }
