@@ -1,5 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Tile } from './tile';
+import { CurrencyPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +115,42 @@ export class TileManagerService {
     }
   }
 
+
+  moveWithKeyPress(key: string)
+  {
+    const emptyIndex = this.findIndexOfEmptyTile();
+    let swapIndex = emptyIndex;
+    if (key == 'w' || key == 'ArrowUp' ) {
+      if (emptyIndex - this.cols >= 0) {
+        swapIndex = emptyIndex - this.cols;
+      }
+    }
+    else if(key == 's' || key == 'ArrowDown')
+    {
+      if (emptyIndex + this.cols < this.tiles.length) {
+        swapIndex = emptyIndex + this.cols;
+      }
+    }
+    else if(key == 'd' || key == 'ArrowRight')
+    {
+      if (emptyIndex + 1 < this.tiles.length && (emptyIndex + 1) % this.rows != 0) {
+        swapIndex = emptyIndex + 1;
+      }
+    }
+    else
+    {
+      if (emptyIndex - 1 >= 0 && (emptyIndex) % this.rows != 0) {
+        swapIndex = emptyIndex - 1;
+      }
+    }
+
+
+    if (swapIndex != emptyIndex) 
+    {
+      this.swapTiles(swapIndex, emptyIndex);
+    }
+  }
+
   getTiles(): Tile[]
   {
     return this.tiles;
@@ -153,7 +190,7 @@ export class TileManagerService {
 
   shuffleT():void
   {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < this.tiles.length; i++) { // שיניתי
 
       let ran1 = Math.floor(Math.random() * this.tiles.length);
       let ran2 = Math.floor(Math.random() * this.tiles.length);
@@ -207,4 +244,6 @@ export class TileManagerService {
     }
     return true;
   }
+
+  
 }

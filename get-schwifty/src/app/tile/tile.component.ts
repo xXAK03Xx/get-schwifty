@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, HostListener} from '@angular/core';
 import { Tile } from '../tile';
 import { TileManagerService } from '../tile-manager.service';
 import { SimpleChanges } from '@angular/core';
@@ -23,8 +23,6 @@ export class TileComponent {
   constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService, public dialog: MatDialog, private router: Router){}
 
   ngOnChanges(changes: SimpleChanges) {
-    // this.size = this.tileManagerService.getSize();
-    console.log("change has been called: " + this.size);
   }
   
   openDialog()

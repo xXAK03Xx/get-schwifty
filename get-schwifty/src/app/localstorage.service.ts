@@ -42,7 +42,7 @@ export class LocalstorageService {
       // grades.push({time: 5,name: "test 22",date: 3})
       let tempScores: Scores[] = [];
       for (let index = 0; index < 6; index++) {
-        tempScores[index] = {rows: 3 + index, cols: 3 + index, results: grades};      
+        tempScores[index] = {rows: 3 + index, cols: 3 + index, results: grades};
       }
       this.setScores(tempScores);
     }   

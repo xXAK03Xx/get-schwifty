@@ -1,10 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Tile } from '../tile';
 import { TileManagerService } from '../tile-manager.service';
 import { LocalstorageService } from '../localstorage.service';
-
-
-
+import { MatDialog } from '@angular/material/dialog';
+import {DialogNameComponent} from '../dialog-name/dialog-name.component'
+import { Router } from '@angular/router';
+import { SolverService } from '../solver.service'; 
 
 @Component({
   selector: 'app-board',
@@ -25,7 +26,8 @@ export class BoardComponent {
   userInput: number = 0;
   startTime: number = -1;
 
-  constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService){}
+  constructor(private tileManagerService: TileManagerService, private localStorageService: LocalstorageService,
+     public dialog: MatDialog, private router: Router, private solverService: SolverService){}
 
 
   ngOnInit(): void
@@ -42,9 +44,48 @@ export class BoardComponent {
   //   return `${value}`;
   // }
 
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    console.log(event.key);
+    this.tileManagerService.moveWithKeyPress(event.key);
+    if (this.tileManagerService.userWin() && this.localStorageService.startTime != -1 ) 
+    {
+      if (this.localStorageService.madeItToLeaderboard(this.rows)) {
+        console.log("user have won");
+        this.openDialog();
+      }
+      else{      
+        this.localStorageService.startTime = -1;
+      }
+    }
+  }
+
+  openDialog()
+  {
+    //check if user actually got to the leaderboard
+    const dialogRef = this.dialog.open(DialogNameComponent,{
+      panelClass: 'dialog-design',
+      width: '60%',
+      height: '30%',
+      enterAnimationDuration: '1000ms',
+      role: 'dialog',
+      data: {userName: "winner"}});
+
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        // let dataT = data == ""? data = "anonymous": data;
+        this.localStorageService.setName( data);
+        this.localStorageService.addScore(this.cols);
+        this.router.navigate(['/leaderboard']);
+      }      
+    );   
+
+  }
+
   handleSliderChange()
   {
-    console.log("i was called");
   }
 
   onInputChange(event: Event) {
@@ -70,6 +111,13 @@ export class BoardComponent {
     this.startTime = -1;
     this.localStorageService.setTimer(-1);
     // this.tiles = this.tileManagerService.getTiles();
+  }
+
+
+  handleSolveClick()
+  {
+    let path = this.solverService.findSolvedPath(this.tiles);
+    console.log(path);
   }
 
   handleShuffleClick()
